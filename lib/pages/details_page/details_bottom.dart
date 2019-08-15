@@ -64,6 +64,7 @@ class DetailsBottom extends StatelessWidget {
               child: Text(
                 '马上购买',
                 style: TextStyle(
+                  
                   color: Colors.white,
                   fontSize: ScreenUtil().setSp(28),
                 ),

@@ -21,18 +21,47 @@ class DetailsBottom extends StatelessWidget {
       height: ScreenUtil().setHeight(80),
       child: Row(
         children: <Widget>[
-          InkWell(
-            onTap: (){},
-            child: Container(
-              width: ScreenUtil().setWidth(110),
-              alignment: Alignment.center,
-              child: Icon(
-                Icons.shopping_cart,
-                size: 35,
-                color: Colors.red,
+          Stack(
+            children: <Widget>[
+              InkWell(
+                onTap: (){},
+                child: Container(
+                  width: ScreenUtil().setWidth(110),
+                  alignment: Alignment.center,
+                  child: Icon(
+                    Icons.shopping_cart,
+                    size: 35,
+                    color: Colors.red,
+                  ),
+                ),
               ),
-            ),
+              Provide<CartProvider>(
+                builder: (context, child, val) {
+                  int goodsCount = Provide.value<CartProvider>(context).allGoodsCount;
+                  return Positioned(
+                    top: 0,
+                    right: 10,
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(6, 3, 6, 3),
+                      decoration: BoxDecoration(
+                        color: Colors.pink,
+                        border: Border.all(width: 2, color: Colors.white),
+                        borderRadius: BorderRadius.circular(12.0)
+                      ),
+                      child: Text(
+                        '${goodsCount}',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: ScreenUtil().setSp(22)
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
           ),
+
           InkWell(
             onTap: () async {
               print('${goodsId}---${goodsName}---${count}---${price}---${images}');
@@ -64,7 +93,7 @@ class DetailsBottom extends StatelessWidget {
               child: Text(
                 '马上购买',
                 style: TextStyle(
-                  
+
                   color: Colors.white,
                   fontSize: ScreenUtil().setSp(28),
                 ),

@@ -4,6 +4,7 @@ import '../../model/cart_info_model.dart';
 import 'cart_count.dart';
 import 'package:provide/provide.dart';
 import '../../provide/cart.dart';
+import '../../routers/application.dart';
 
 class CartItem extends StatelessWidget {
   final CartInfoMode item;
@@ -24,7 +25,7 @@ class CartItem extends StatelessWidget {
       child: Row(
         children: <Widget>[
           _cartCheckBt(context, item),
-          _cartImage(item),
+          _cartImage(context, item),
           _cartGoodsName(item),
           _cartPrice(context, item)
         ],
@@ -46,14 +47,23 @@ class CartItem extends StatelessWidget {
   }
 
   /// 商品图片方法
-  Widget _cartImage(item) {
+  Widget _cartImage(context, item) {
     return Container(
       width: ScreenUtil().setWidth(150),
       padding: EdgeInsets.all(3.0),
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.black12)
       ),
-      child: Image.network(item.images),
+      child: InkWell(
+        onTap: (){
+          print('进入详情页');
+          Application.router.navigateTo(context, '/detail?id=${'goodsId'}');
+        },
+        child: Image.network(item.images),
+      ),
+
+
+
     );
   }
 

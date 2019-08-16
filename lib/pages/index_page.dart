@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import '../provide/current_index.dart';
+import '../test/provide_test.dart';
 
 import 'home_page.dart';
 import 'category_page.dart';
@@ -42,6 +43,8 @@ class _IndexPageState extends State<IndexPage>{
     CategoryPage(),
     CartPage(),
     MemberPage()
+    // 测试provide效果
+//    TestProviderView()
   ];
   int currentIndex= 0;
   var currentPage ;

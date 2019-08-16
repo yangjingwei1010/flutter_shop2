@@ -3,6 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import '../../provide/cart.dart';
 import '../../provide/details_info.dart';
+import '../../config/message_toast.dart';
+import '../../test/counter.dart';
+
+
 
 class DetailsBottom extends StatelessWidget {
 
@@ -24,7 +28,10 @@ class DetailsBottom extends StatelessWidget {
           Stack(
             children: <Widget>[
               InkWell(
-                onTap: (){},
+                onTap: (){
+                  Provide.value<Counter>(context).changeIndex(2);
+                  Navigator.pop(context);
+                },
                 child: Container(
                   width: ScreenUtil().setWidth(110),
                   alignment: Alignment.center,
@@ -48,11 +55,17 @@ class DetailsBottom extends StatelessWidget {
                         border: Border.all(width: 2, color: Colors.white),
                         borderRadius: BorderRadius.circular(12.0)
                       ),
-                      child: Text(
-                        '${goodsCount}',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: ScreenUtil().setSp(22)
+                      child: InkWell(
+                        onTap: (){
+                          Provide.value<Counter>(context).changeIndex(2);
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                            '${goodsCount}',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: ScreenUtil().setSp(22)
+                            )
                         ),
                       ),
                     ),
@@ -83,7 +96,7 @@ class DetailsBottom extends StatelessWidget {
           ),
           InkWell(
             onTap: () async {
-              await Provide.value<CartProvider>(context).remove();
+              MessageToast.showToast();
             },
             child: Container(
               alignment: Alignment.center,

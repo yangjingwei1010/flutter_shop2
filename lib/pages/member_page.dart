@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../routers/application.dart';
+import 'package:provide/provide.dart';
+import '../test/counter.dart';
 
 class MemberPage extends StatelessWidget {
   @override
@@ -13,7 +16,7 @@ class MemberPage extends StatelessWidget {
           _topHeader(),
           _orderTitle(),
           _orderType(),
-          _anctionList()
+          _anctionList(context)
         ],
       ),
     );
@@ -21,6 +24,7 @@ class MemberPage extends StatelessWidget {
 
   /// 顶部头像区域
   Widget _topHeader(){
+    print('ScreenUtil----${ScreenUtil().scaleHeight}-----${ScreenUtil().scaleWidth}');
     return Container(
       width: ScreenUtil().setWidth(750),
       padding: EdgeInsets.all(20),
@@ -57,6 +61,7 @@ class MemberPage extends StatelessWidget {
   Widget _orderTitle(){
     return Container(
       margin: EdgeInsets.only(top: 10),
+      padding: EdgeInsets.only(top: 10, bottom: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(
@@ -135,33 +140,39 @@ class MemberPage extends StatelessWidget {
   }
 
   ///listTitle
-  Widget _anctionList(){
+  Widget _anctionList(context){
     return Container(
       margin: EdgeInsets.only(top: 10),
       child: Column(
         children: <Widget>[
-          _myListTile('领取优惠券'),
-          _myListTile('已领取优惠券'),
-          _myListTile('地址管理'),
-          _myListTile('客服电话'),
-          _myListTile('关于我们'),
+          _myListTile(context, '领取优惠券'),
+          _myListTile(context, '已领取优惠券'),
+          _myListTile(context, '地址管理'),
+          _myListTile(context, '客服电话'),
+          _myListTile(context, '关于我们'),
         ],
       ),
     );
   }
 
-  Widget _myListTile(String title){
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(
-          bottom: BorderSide(width: 1, color: Colors.black12)
-        )
-      ),
-      child: ListTile(
-        leading: Icon(Icons.blur_circular),
-        title: Text(title),
-        trailing: Icon(Icons.arrow_right),
+  Widget _myListTile(context, String title){
+    return InkWell(
+      onTap: (){
+        Application.router.navigateTo(context, '/member');
+        Provide.value<Counter>(context).tranferTitle(title);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border(
+                bottom: BorderSide(width: 1, color: Colors.black12)
+            )
+        ),
+        child: ListTile(
+          leading: Icon(Icons.blur_circular),
+          title: Text(title),
+          trailing: Icon(Icons.arrow_right),
+        ),
       ),
     );
   }

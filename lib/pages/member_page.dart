@@ -37,8 +37,8 @@ class MemberPage extends StatelessWidget {
               child:
               Image.network(
                 'http://images.baixingliangfan.cn/compressedPic/20190121171258_323.jpg',
-                width: ScreenUtil().setWidth(150),
-                height: ScreenUtil().setHeight(150),
+                width: 150,
+                height: 150,
               ),
             ),
           ),

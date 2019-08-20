@@ -2,22 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provide/provide.dart';
 import '../../provide/cart.dart';
+import 'package:sprintf/sprintf.dart';
 
 class CartBottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(5.0),
-      color: Colors.white,
-      width: ScreenUtil().setWidth(750),
-      child: Row(
-        children: <Widget>[
-          selectAllBtn(context),
-          allPriceArea(context),
-          gobutton(context)
-        ],
-      ),
+    return Provide<CartProvider>(
+      builder: (context, child, val) {
+        return Container(
+            margin: EdgeInsets.all(5.0),
+            color: Colors.white,
+            width: ScreenUtil().setWidth(750),
+            child: Row(
+              children: <Widget>[
+                selectAllBtn(context),
+                allPriceArea(context),
+                gobutton(context)
+              ],
+            ),
+        );
+      }
     );
+
   }
 
   /// 全选按钮
@@ -42,7 +48,8 @@ class CartBottom extends StatelessWidget {
 
   /// 合计区域
   Widget allPriceArea(context) {
-    double allPrice = Provide.value<CartProvider>(context).allPrice;
+    double price = Provide.value<CartProvider>(context).allPrice;
+    String allPrice = sprintf('¥%.2f',[price]);
     return Container(
       width: ScreenUtil().setWidth(430),
       alignment: Alignment.centerRight,
@@ -64,7 +71,7 @@ class CartBottom extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 width: ScreenUtil().setWidth(150),
                 child: Text(
-                  '¥${allPrice}',
+                  allPrice,
                   style: TextStyle(
                     fontSize: ScreenUtil().setSp(36),
                     color: Colors.red

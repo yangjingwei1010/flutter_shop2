@@ -92,6 +92,7 @@ class CartProvider with ChangeNotifier {
         cartList.add(CartInfoMode.fromJson(item));
       });
     }
+    print('allPrice---:$allPrice');
     notifyListeners();
 
   }
@@ -171,6 +172,7 @@ class CartProvider with ChangeNotifier {
     }
     tempList[changeIndex] = cartItem.toJson();
     cartString = json.encode(tempList).toString();
+    print('cartString---:$cartString');
     prefs.setString('cartInfo', cartString);
     await getCartInfo();
   }

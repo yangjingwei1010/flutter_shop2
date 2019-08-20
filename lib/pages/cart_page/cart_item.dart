@@ -22,14 +22,21 @@ class CartItem extends StatelessWidget {
           bottom: BorderSide(width: 1, color: Colors.black12)
         )
       ),
-      child: Row(
-        children: <Widget>[
-          _cartCheckBt(context, item),
-          _cartImage(context, item),
-          _cartGoodsName(item),
-          _cartPrice(context, item)
-        ],
-      ),
+      child: InkWell(
+        onTap: (){
+          print('进入详情页');
+          Application.router.navigateTo(context, '/detail?id=${'goodsId'}');
+        },
+        child: Row(
+          children: <Widget>[
+            _cartCheckBt(context, item),
+            _cartImage(context, item),
+            _cartGoodsName(item),
+            _cartPrice(context, item)
+          ],
+        ),
+      )
+
     );
   }
 

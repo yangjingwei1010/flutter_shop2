@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../routers/application.dart';
 import 'package:provide/provide.dart';
 import '../test/counter.dart';
+import 'dart:convert';
 
 class MemberPage extends StatelessWidget {
   @override
@@ -14,7 +15,7 @@ class MemberPage extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           _topHeader(),
-          _orderTitle(),
+          _orderTitle(context),
           _orderType(),
           _anctionList(context)
         ],
@@ -58,22 +59,29 @@ class MemberPage extends StatelessWidget {
   }
 
   /// 订单标题
-  Widget _orderTitle(){
-    return Container(
-      margin: EdgeInsets.only(top: 10),
-      padding: EdgeInsets.only(top: 10, bottom: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(
-          bottom: BorderSide(width: 1, color: Colors.black12)
-        )
-      ),
-      child: ListTile(
-        leading: Icon(Icons.list),
-        title: Text('我的订单'),
-        trailing: Icon(Icons.arrow_right),
+  Widget _orderTitle(context){
+    return InkWell(
+      onTap: (){
+        var json = jsonEncode(Utf8Encoder().convert('这是通过json转换传递的参数'));
+        Application.router.navigateTo(context, '/member2?title=$json');
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: 10),
+        padding: EdgeInsets.only(top: 10, bottom: 10),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border(
+                bottom: BorderSide(width: 1, color: Colors.black12)
+            )
+        ),
+        child: ListTile(
+          leading: Icon(Icons.list),
+          title: Text('我的订单'),
+          trailing: Icon(Icons.arrow_right),
+        ),
       ),
     );
+
   }
 
   /// 订单列表
@@ -159,7 +167,7 @@ class MemberPage extends StatelessWidget {
     return InkWell(
       onTap: (){
         Application.router.navigateTo(context, '/member');
-        Provide.value<Counter>(context).tranferTitle(title);
+        Provide.value<Counter>(context).tranferTitle('这是通过provide传递的参数');
       },
       child: Container(
         decoration: BoxDecoration(

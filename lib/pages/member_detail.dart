@@ -19,7 +19,7 @@ class MemberDetail extends StatelessWidget {
                     Navigator.pop(context);
                   }
               ),
-              title: Text(title),
+              title: Text('我的详情'),
             ),
             body: Center(
               child: Text(title),

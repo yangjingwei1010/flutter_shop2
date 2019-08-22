@@ -6,6 +6,7 @@ class Routes {
   static String root = '/';
   static String detailsPage = '/detail';
   static String memberPage = '/member';
+  static String memberPage2 = '/member2';
   static void configFoundHandler(Router router) {
     router.notFoundHandler = Handler(
       handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -14,6 +15,7 @@ class Routes {
     );
     router.define(detailsPage, handler: detailsHandler);
     router.define(memberPage, handler: membetHandler);
+    router.define(memberPage2, handler: membetHandler2);
   }
 
 }
